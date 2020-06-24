@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/dashboard_layout_admin}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <script src="/js/addCategory.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="main-content" layout:fragment="main-content">
+
+    <main class="my-form">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header" id="title"><span th:text="#{ad.form.title}">Add a New Ads </span></div>
+                        <div class="card-body">
+                            <form action="#" name="my-form"  th:action="@{/admin/ads}" th:object="${ads}" method="post">
+
+                        <div class="alert alert-warning" th:if="${errormessage}">
+                            <a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a>
+                            <strong th:text="${errormessage}"></strong>
+                        </div>
+
+                                <div class="form-group row">
+                                    <label for="description" class="col-md-4 col-form-label text-md-right"><span th:text="#{ad.form.description}">Description: </span></label>
+                                    <div class="col-md-6">
+                                        <textarea type="text"  th:field="*{description}" id="line1" class="form-control" name="description"></textarea>
+                                        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:errorclass="fieldError" class="errorTypes">Incorrect input </span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        <span th:text="#{ad.form.btadd}">Add Ads</span>
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </main>
+</div>
+
+</body>
+</html>

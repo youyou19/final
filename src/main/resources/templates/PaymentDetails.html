@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/dashboard_layout_admin}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/addCategory.css}">
+    <script src="/js/addCategory.js"></script>
+    <a th:href="@{'/admin/categoryPdf'}" style="float: right;"><img src="/images/icons/pdf.png" style="width: 40px;"></a>
+    <a th:href="@{'/admin/categoryExcel'}" style="float: right;"><img src="/images/icons/excel.png" style="width: 40px;"></a>
+    <a th:href="@{'/admin/categoryCsv'}" style="float: right;"> <img src="/images/icons/csv1.png" style="width: 40px;"></a>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="main-content" layout:fragment="main-content">
+
+    <div class="container-fluid">
+        <div class="container">
+            <div class="formBox">
+                <form action="#" th:action="@{/admin/editPayment}" th:object="${payment}" method="post">
+                    <input type="hidden"  th:field="*{id}"  class="input">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h1><span th:text="#{payment.form.edit}">Edit Payment </span></h1>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="inputBox ">
+                                <label><span th:text="#{payment.form.cardNumber}">cardNumber: </span></label>
+                                <input type="text"  th:field="*{cardNumber}"  class="input">
+                                <span th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}" th:errorclass="fieldError">Incorrect cardNumber </span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="inputBox">
+                                <label><span th:text="#{payment.form.name}">Name: </span></label>
+                                <input type="text" th:field="*{name}"  class="input">
+                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="fieldError">Incorrect name</span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="inputBox">
+
+                                <fieldset class="optionGroup">
+                                    <label>
+                                        <input type="radio" th:field="*{cardType}" th:value="${cardType.get('PAYPAL')}" ><img src="/images/icons/icon-pay-01.png" style="width: 50px;">
+                                    </label>
+                                    &nbsp; &nbsp; &nbsp;
+                                    <label>
+                                        <input type="radio" th:field="*{cardType}" th:value="${cardType.get('VISA')}"><img src="/images/icons/icon-pay-03.png" style="width: 50px;">
+                                    </label>
+                                    &nbsp; &nbsp; &nbsp;
+                                    <label>
+                                        <input type="radio" th:field="*{cardType}" th:value="${cardType.get('MASTERCARD')}"> <img src="/images/icons/icon-pay-02.png" style="width: 50px;">
+                                    </label>
+                                    &nbsp; &nbsp; &nbsp;
+                                    <label>
+                                        <input type="radio" th:field="*{cardType}" th:value="${cardType.get('DISCOVER')}"><img src="/images/icons/icon-pay-05.png" style="width: 50px;">
+                                    </label>
+                                    &nbsp; &nbsp; &nbsp;
+                                    <label>
+                                        <input type="radio" th:field="*{cardType}"  th:value="${cardType.get('AMEX')}"><img src="/images/icons/icon-pay-04.png" style="width: 50px;">
+                                    </label>
+
+
+                                    &nbsp;
+                                    <!--    <input type="radio" th:field="*{type}" th:value="${adr.key}"/>
+                                        <label th:for="${#ids.prev('type')}" th:text="${adr.value}">Address Type</label>
+          -->
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="inputBox">
+                                <label><span th:text="#{payment.form.expiryDate}">expiryDate: </span></label>
+                                <input type="text" th:field="*{expiryDate}"  class="input">
+                                <span th:if="${#fields.hasErrors('expiryDate')}" th:errors="*{expiryDate}" th:errorclass="fieldError">Incorrect expiryDate</span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="inputBox">
+                                <label><span th:text="#{payment.form.cvv}">cvv: </span></label>
+                                <input type="text" th:field="*{cvv}"  class="input">
+                                <span th:if="${#fields.hasErrors('cvv')}" th:errors="*{cvv}" th:errorclass="fieldError">Incorrect cvv</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--                    <div class="row">-->
+                    <!--                        <div class="col-sm-6">-->
+                    <!--                            <div class="inputBox ">-->
+                    <!--                                <label >User  </label>-->
+                    <!--                                <input type="hidden"  th:field="*{id}"  class="input">-->
+                    <!--                                <select id="buyer" th:field="*{buyer}">-->
+                    <!--                                    <option value="">Select a User</option>-->
+                    <!--                                    <option th:each="user:${users}" th:value="${buyer.id}" th:text="${user.buyer}"></option>-->
+                    <!--                                    &lt;!&ndash;<input type="text"  th:field="*{name}"  class="input"> &ndash;&gt;-->
+                    <!--                                </select>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input type="submit" name="" class="button" th:value="#{payment.form.btedit}">Edit Product
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

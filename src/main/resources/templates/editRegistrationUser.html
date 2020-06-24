@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/dashboard_layout_admin}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <script src="/js/addCategory.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="main-content" layout:fragment="main-content">
+
+    <main class="my-form">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header" id="title"><span th:text="#{registre.form.edit}">Edit User ! </span></div>
+                        <div class="card-body">
+                            <form action="#" name="my-form"  th:action="@{/admin/editRegistrations}" th:object="${user}" method="post">
+
+                                <div class="form-group row">
+                                <label for="firstName" class="col-md-4 col-form-label text-md-right"><span th:text="#{registre.form.firstName}">First Name: </span></label>
+                                <div class="col-md-6">
+                                    <input type="hidden"  th:field="*{id}"  class="input">
+                                    <input type="text"  th:field="*{firstName}" id="firstName" class="form-control" name="firstName"></input>
+                                    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:errorclass="fieldError" class="errorTypes">Incorrect input </span>
+                                </div>
+                        </div>
+
+                                <div class="form-group row">
+                                <label for="lastName" class="col-md-4 col-form-label text-md-right"><span th:text="#{registre.form.lastName}">Last Name: </span></label>
+                                <div class="col-md-6">
+                                    <input type="text"  th:field="*{lastName}" id="lastName" class="form-control" name="lastName"></input>
+                                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:errorclass="fieldError" class="errorTypes">Incorrect input </span>
+                                </div>
+                           </div>
+
+                        <div class="form-group row">
+                            <label for="userName" class="col-md-4 col-form-label text-md-right"><span th:text="#{registre.form.userName}">User Name: </span></label>
+                            <div class="col-md-6">
+                                <input type="text"  th:field="*{userName}" id="userName" class="form-control" name="userName"></input>
+                                <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" th:errorclass="fieldError" class="errorTypes">Incorrect input </span>
+                            </div>
+                        </div>
+
+
+                                <div class="form-group row">
+                                <label for="passWord" class="col-md-4 col-form-label text-md-right"><span th:text="#{registre.form.passWord}">Password: </span></label>
+                                <div class="col-md-6">
+                                    <input type="password"  th:field="*{password}" id="passWord" class="form-control" name="password"></input>
+                                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="fieldError" class="errorTypes">Incorrect input </span>
+                                </div>
+                            </div>
+
+                                <div class="form-group row">
+                                    <label for="email" class="col-md-4 col-form-label text-md-right"><span th:text="#{registre.form.email}">Email: </span></label>
+                                    <div class="col-md-6">
+                                        <input type="text"  th:field="*{email}" id="email" class="form-control" name="email"></input>
+                                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="fieldError" class="errorTypes">Incorrect input </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="role" class="col-md-4 col-form-label text-md-right"><span th:text="#{registre.form.role}">Role: </span></label>
+                                    <div class="col-md-6">
+                                        <select id="role" th:field="*{roles}">
+                                            <option value=""><span th:text="#{registre.form.select}">Select a Role </span></option>
+                                            <option th:each="rol:${roles}" th:value="${rol.id}" th:text="${rol.role}"></option>
+                                        </select>
+                                   <span th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" th:errorclass="fieldError" class="errorTypes">Incorrect Role </span>
+
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        <span th:text="#{registre.form.btedit}">Edit</span>
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </main>
+</div>
+
+</body>
+</html>

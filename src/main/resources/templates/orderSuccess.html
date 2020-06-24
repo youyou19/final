@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/dashboard_layout_admin}">
+
+
+<head>
+    <!--    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/categoryList.css}"> -->
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/css/paymentList.css}" />
+    <link rel="icon" href="favicon.ico">
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/curelan/bootstrap.min.css" rel="stylesheet" integrity="sha384-WTtvlZJeRyCiKUtbQ88X1x9uHmKi0eHCbQ8irbzqSLkE0DpAZuixT5yFvgX0CjIu" crossorigin="anonymous">
+    <link rel="stylesheet"  href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+    <title>Title</title>
+    <script>
+        function getDate() {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+            if(dd<10) {
+                dd = '0'+dd
+            }
+            if(mm<10) {
+                mm = '0'+mm
+            }
+            today = yyyy + '/' + mm + '/' + dd;
+            console.log(today);
+            document.getElementById("date").value = today;
+        }
+
+
+        window.onload = function() {
+            getDate();
+        };
+    </script>
+
+
+
+</head>
+<body>
+
+<div id="main-content" layout:fragment="main-content">
+    <div layout:fragment="content" class="container mySpace">
+        <a th:href="@{'/admin/orderPdf/'+${order.id}}" style="float: right;"><img src="/images/icons/pdf.png" style="width: 40px;"></a>
+        <a th:href="@{'/admin/orderExcel/'+${order.id}}" style="float: right;"><img src="/images/icons/excel.png" style="width: 40px;"></a>
+        <a th:href="@{'/admin/orderCsv'}" style="float: right;"> <img src="/images/icons/csv1.png" style="width: 40px;"></a>
+
+        <!--  <h3>Add a new Payment</h3> -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                </div>
+                <div class="col-md-12">
+
+<!--                    <h2 style="text-align: center"><span th:text="#{payment.form.list}">List of Payments</span></h2>-->
+                    <h2 style="text-align: center">Order Create Successfully </h2>
+                    <div style="margin-top: 10px">
+<!--                        <table id="tablePayment"-->
+<!--                               class="table table-striped table-bordered" style="width: 100%">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th><span th:text="#{payment.form.cardNumber}">CardNumber</span></th>-->
+<!--                                <th><span th:text="#{payment.form.name}">Name</span></th>-->
+<!--                                <th><span th:text="#{payment.form.cardType}">CardType</span></th>-->
+<!--                                <th><span th:text="#{payment.form.expiryDate}">ExpiryDate</span></th>-->
+<!--                                <th><span th:text="#{payment.form.cvv}">cvv</span></th>-->
+
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr th:each="payment:${paymentList}">-->
+<!--                                <td th:text="${payment.cardNumber}"></td>-->
+<!--                                <td th:text="${payment.name}"></td>-->
+<!--                                <td th:text="${payment.cardType}"></td>-->
+<!--                                <td th:text="${payment.expiryDate}"></td>-->
+<!--                                <td th:text="${payment.cvv}"></td>-->
+<!--                                <td><a th:href="@{'/admin/getPayment/'+${payment.id}}"><i-->
+<!--                                        class="fa fa-edit" style="font-size: 21px;"></i></a>-->
+<!--                                   &lt;!&ndash; <a-->
+<!--                                            href="javascript:void(0)" class="confirm-delete"-->
+<!--                                            th:attr="data-id=${payment.id}, data-name=${payment.cardNumber+' '+payment.cardType}">-->
+<!--                                        <i class="fa fa-trash" style="font-size: 21px; color: red;"></i>-->
+<!--                                    </a> &ndash;&gt;-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+
+
+
+                        <h5> Order Number :<span th:text="${order.id}"></span></h5>
+                        <p>
+                            Date Order :<span th:text="${order.creationDate}"></span>
+                        </p>
+
+                         <h6> List Items </h6>
+                        <div class="wrap-table-shopping-cart">
+                            <table class="table-shopping-cart">
+                                <tr class="table_head">
+                                    <th class="column-1">Product</th>
+                                    <th class="column-2"></th>
+                                    <th class="column-3">Price</th>
+                                    <th class="column-4">Quantity</th>
+                                    <th class="column-5">Total</th>
+                                    <th class="column-6">Payment Method</th>
+                                    <th class="column-7">Shiping Adress</th>
+                                </tr>
+
+
+                                <!--                                Loop la ap la -->
+                                <tr class="table_row" th:each="item:${orderItem}">
+                                    <td class="column-1">
+                                        <div class="how-itemcart1">
+                                            <!--                                            <img src="/images/item-cart-04.jpg" alt="IMG">-->
+                                            <img th:src="@{'/img/'+${item.product.imageId}}" alt="IMG-PRODUCT">
+                                        </div>
+                                    </td>
+                                    <td class="column-2" th:text="${item.product.description}">Fresh Strawberries</td>
+                                    <td class="column-3" th:text="${item.product.price}">$ 36.00</td>
+                                    <td class="column-4" th:text="${item.itemQuantity}"> </td>
+                                    <td class="column-5" th:text="${item.price}">Total Price per Item</td>
+                                    <td class="column-6" th:text="${order.payment.cardType}">Payment Methode</td>
+                                    <td>Adress </td>
+                                </tr>
+                                <!--/////////////////////////////////////-->
+
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            $("#tablePayment").dataTable();
+            $(".confirm-delete").on('click', function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+                $("#modal-name").html(name);
+                $('#idModelLink').attr('href', '/deletePayment/' + id);
+                $('#paymentModal').modal('show');
+            });
+
+        </script>
+
+        <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body" id="myModalBody">
+                        <p>
+                            Voulez-vous supprimer cet (<span id="modal-name"></span>)
+                            enregistrement?
+                        </p>
+
+                        <div class="modal-footer">
+                            <a id="idModelLink" href="#" class="btn btn-primary">Yes</a>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

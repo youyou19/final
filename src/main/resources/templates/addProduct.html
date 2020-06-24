@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/dashboard_layout_admin}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <script src="/js/addCategory.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="main-content" layout:fragment="main-content">
+
+    <main class="my-form">
+        <div class="cotainer">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header" id="title"><span th:text="#{product.form.title}">Add a New Product </span></div>
+                        <div class="card-body">
+                            <form action="#" name="my-form"  th:action="@{/admin/product}" th:object="${product}" method="post" enctype="multipart/form-data">
+                                <div class="alert alert-warning" th:if="${errormessage}">
+                                    <a href="#" class="close" data-dismiss="alert" arial-label="close">&times;</a>
+                                    <strong th:text="${errormessage}"></strong>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="category" class="col-md-4 col-form-label text-md-right"><span th:text="#{product.form.category}">Category: </span></label>
+                                    <div class="col-md-6">
+                                        <select id="category" th:field="*{category}">
+                                            <option value=""><span th:text="#{product.form.select}">Select a Category </span></option>
+                                            <option th:each="category:${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                                        </select>
+                                        <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}" th:errorclass="fieldError" class="errorTypes">Incorrect Category </span>
+
+                                    </div>
+                                </div>
+
+
+     <div class="form-group row">
+         <label for="name" class="col-md-4 col-form-label text-md-right"><span th:text="#{product.form.name}">Name: </span></label>
+         <div class="col-md-6">
+             <input type="text"  th:field="*{name}" id="name" class="form-control" name="name">
+             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="fieldError" class="errorTypes">Incorrect name </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right"><span th:text="#{product.form.description}">Description: </span></label>
+                                    <div class="col-md-6">
+                                        <textarea type="text"  th:field="*{description}" id="description" class="form-control" name="description"></textarea>
+                                        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:errorclass="fieldError" class="errorTypes">Incorrect Description </span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right"><span th:text="#{product.form.quantity}">Quantity: </span></label>
+                                    <div class="col-md-6">
+                                        <input type="text"  th:field="*{quantity}" id="quantity" class="form-control" name="quantity">
+                                        <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" th:errorclass="fieldError" class="errorTypes">Incorrect Quantity </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right"><span th:text="#{product.form.price}">Price: </span></label>
+                                    <div class="col-md-6">
+                                        <input type="text"  th:field="*{price}" id="price" class="form-control" name="price">
+                                        <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:errorclass="fieldError" class="errorTypes">Incorrect Price </span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="name" class="col-md-4 col-form-label text-md-right"><span th:text="#{product.form.image}">Image: </span></label>
+                                    <div class="col-md-6">
+                                        <input th:field="*{imageFile}" id="imageFile"
+                                               type="file"  name="image"/>
+                                        <span th:if="${#fields.hasErrors('imageFile')}" th:errors="*{imageFile}" th:errorclass="fieldError" class="errorTypes">Incorrect Image </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        <span th:text="#{product.form.btadd}">Add Product </span>
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </main>
+</div>
+</div>
+
+</body>
+</html>

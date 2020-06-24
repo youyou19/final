@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/dashboard_layout_admin}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/addCategory.css}">
+    <script src="/js/addCategory.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="main-content" layout:fragment="main-content">
+
+    <div class="container-fluid">
+        <div class="container">
+            <div class="formBox">
+                    <form action="#" th:action="@{/admin/editCategory}" th:object="${category}" method="post">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h1><span th:text="#{category.form.edit}">Edit Category </span></h1>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="inputBox ">
+                                <label><span th:text="#{category.form.name}">Name: </span></label>
+                                <input type="hidden"  th:field="*{id}"  class="input">
+                                <input type="text"  th:field="*{name}"  class="input">
+                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="fieldError" class="errorTypes">Incorrect name </span>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="inputBox">
+                                <label><span th:text="#{category.form.description}">Description: </span></label>
+                                <input type="text" th:field="*{description}"  class="input">
+                                <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:errorclass="fieldError" class="errorTypes">Incorrect desccription</span>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input type="submit" name="" class="button" th:value="#{category.form.btedit}">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
